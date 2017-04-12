@@ -9,11 +9,13 @@
 
 #define END_OF_STR '\0'
 
+using namespace std;
+
 int abs(int i){
     return i < 0 ? -i : i;
 }
 
-void String::constructString(const char * str){
+void String::constructString(const char * const str){
     _size = strlen(str);
     _capacity = _size + 1;
     _str = new char[_capacity];
@@ -55,77 +57,108 @@ String::operator const char*() const{
     return (const char *)_str;
 }
 
-bool String::operator == (const String &str) const{
-    //Comparaison des deux chaînes, la capacité n'a pas
-    //à être comparée selon nous.
-    //return str._str == _str;
-    if(_size != str._size)
+bool String::equals(const String &str) const{
+    return equals(str._str);
+}
+
+bool String::equals(const char* const str) const{
+    if(_size != strlen(str))
         return false;
-    for(int i = 0; i < _size; i++)
-        if(_str[i] != str._str[i])
+    for(int i = 0; i < _size; i++){
+        if(_str[i] != str[i])
             return false;
+    }
     return true;
+}
+
+bool String::operator == (const String &str) const{
+    return equals(str);
+}
+
+bool String::operator == (const char* const str) const{
+    return equals(str);
 }
 
 unsigned int String::size() const{
     return _size;
 }
 
-String& String::operator +=(const String& b){
-    char* buffer = new char[_capacity + b._size];
+void String::append(const char* const other){
+    char* buffer = new char[_capacity + strlen(other)];
     strcpy(buffer, _str);
-    strcat(buffer, b._str);
-    buffer[_size + b._size] = END_OF_STR;
+    strcat(buffer, other);
+    buffer[_size + strlen(other)] = END_OF_STR;
     
     delete[] _str;
-    _str = NULL;
     constructString(buffer);
-    
+}
+
+void String::append(const char& b){
+    const char str[2] = {b, END_OF_STR};
+    this->append(str);
+}
+
+void String::append(const String& b){
+    this->append(b._str);
+}
+
+String& String::operator +=(const String& b){
+    this->append(b);
     return *this;
 }
 
-String& String::operator +=(const char* b){
-    String str(b);
-    return *this += str;
+String& String::operator +=(const char* const b){
+    this->append(b);
+    return *this;
 }
 
 String& String::operator +=(const char& b){
-    String str(b);
-    return *this += str;
+    this->append(b);
+    return *this;
 }
 
-String operator+(String a, const String &b) {
-    a += b;
+String operator+(String a, const String &b){
+    a.append(b);
     return a;
 }
 
-String operator+(String a, const char* b) {
-    a += b;
+String operator+(String a, const char* const b){
+    a.append(b);
     return a;
 }
 
-String operator+(String a, const char &b) {
-    a += b;
+String operator+(String a, const char &b){
+    a.append(b);
     return a;
 }
 
-char& String::operator[](int index) const{
-    //if(index >= this->size())
-        //throw std::out_of_range();
+String operator+(const char &b, String a){
+    String c(b);
+    c.append(a);
+    return c;
+}
 
+char& String::at(int index) const{
+    if(index >= this->size())
+        throw out_of_range("out of range!");
     return _str[index];
 }
 
-const char* String::operator=(const char* str) {
+char& String::operator[](int index) const{
+    return this->at(index);
+}
+
+const char* String::operator=(const char* const str) {
     delete[] _str;
     constructString(str);
     return _str;
 }
 
 String String::substr(int from, int to) const {
-    char* clone = new char[_size];
+    char clone[_capacity];
     strcpy(clone, _str);
-    clone += from;
     clone[to] = END_OF_STR;
-    return String(clone);
+    char * str = clone;
+    str += from;
+    return String(str);
 }
