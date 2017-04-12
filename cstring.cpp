@@ -11,6 +11,11 @@
 
 using namespace std;
 
+/**
+ * Retourne la valeur absolue d'un entier
+ * @param i
+ * @return 
+ */
 int abs(int i){
     return i < 0 ? -i : i;
 }
@@ -22,11 +27,13 @@ void String::constructString(const char * const str){
     strcpy(_str, str);
     _str[_size] = END_OF_STR;
 }
+
 String::String() : String(""){}
 
 String::String(const char* str){
     constructString(str);
 }
+
 String::String(const char& chr){
     char str[2] = {chr, END_OF_STR};
     constructString((const char *)str);
@@ -41,6 +48,7 @@ String::String(const int& entier){
     sprintf(str, "%d", entier);
     constructString((const char *)str);
 }
+
 String::String(const double& reel){
     char str[3 + DBL_MAX_10_EXP - DBL_MIN_EXP];
     sprintf(str, "%f", reel);
@@ -58,7 +66,7 @@ String::operator const char*() const{
 }
 
 bool String::equals(const String &str) const{
-    return equals(str._str);
+    return this->equals(str._str);
 }
 
 bool String::equals(const char* const str) const{
@@ -72,11 +80,11 @@ bool String::equals(const char* const str) const{
 }
 
 bool String::operator == (const String &str) const{
-    return equals(str);
+    return this->equals(str);
 }
 
 bool String::operator == (const char* const str) const{
-    return equals(str);
+    return this->equals(str);
 }
 
 unsigned int String::size() const{
@@ -138,19 +146,23 @@ String operator+(const char &b, String a){
     return c;
 }
 
-char& String::at(int index) const{
+char& String::at(unsigned int index) const{
     if(index >= this->size())
         throw out_of_range("out of range!");
     return _str[index];
 }
 
-char& String::operator[](int index) const{
+char& String::operator[](unsigned int index) const{
     return this->at(index);
 }
 
-const char* String::operator=(const char* const str) {
+void String::set(const char* str){
     delete[] _str;
     constructString(str);
+}
+
+const char* String::operator=(const char* const str) {
+    this->set(str);
     return _str;
 }
 
