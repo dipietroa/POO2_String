@@ -15,12 +15,13 @@ class String{
         char * _str;
     public:
         String();
-        String(const char * &str);
+        String(const char * str);
         String(const String& str);
         String(const char& chr);
         String(const int& entier);
-        String(const float& reel);
+        String(const double& reel);
         String(const bool& booleen);
+        void constructString(const char * str);
         ~String();
         operator const char*() const;
         unsigned int size() const;

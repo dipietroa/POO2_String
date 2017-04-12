@@ -13,8 +13,8 @@ using namespace std;
  * 
  */
 int main(int argc, char** argv) {
-    String str;
-    String str2 = false;
+    String str("bonjour");
+    String str2(1.2);
     int salut = 2;
     
     cout <<"\'"<< str <<"\'"<< endl <<"\'"<< str2 <<"\'"<< endl;
