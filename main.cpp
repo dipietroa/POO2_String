@@ -14,7 +14,7 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     String str("bonjour");
-    String str2(1.2);
+    String str2(-1000000000);
     int salut = 2;
     
     cout <<"\'"<< str <<"\'"<< endl <<"\'"<< str2 <<"\'"<< endl;
