@@ -72,28 +72,24 @@ unsigned int String::size() const{
 }
 
 String& String::operator +=(const String& b){
-    _size += b._size;
-    _capacity += b._capacity -1;
-    
-    char* buffer = new char[_capacity];
+    char* buffer = new char[_capacity + b._size];
     strcpy(buffer, _str);
     strcat(buffer, b._str);
     
     delete[] _str;
-    _str = NULL;
     constructString(buffer);
     
     return *this;
 }
 
 String& String::operator +=(const char* b){
-    const String str(b);
-    *this += str;
+    String str(b);
+    return *this += str;
 }
 
 String& String::operator +=(const char& b){
-    const String str(b);
-    *this += str;
+    String str(b);
+    return *this += str;
 }
 
 String operator+(String a, const String &b) {
@@ -125,7 +121,7 @@ const char* String::operator=(const char* str) {
 }
 
 String String::substr(int from, int to) const {
-    char* clone = new char[size()];
+    char* clone = new char[_size];
     strcpy(clone, _str);
     clone += from;
     clone[to] = END_OF_STR;

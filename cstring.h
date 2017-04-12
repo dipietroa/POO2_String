@@ -28,9 +28,9 @@ class String{
         friend String operator+(String a, const String &b);
         friend String operator+(String a, const char *b);
         friend String operator+(String a, const char &b);
-        String& operator+=(const String &b);
-        String& operator+=(const char *b);
-        String& operator+=(const char &b);
+        const String& operator+=(const String &b);
+        const String& operator+=(const char *b);
+        const String& operator+=(const char &b);
         unsigned int size() const;
         char& operator[](int index) const;
         const char* operator=(const char* str);
