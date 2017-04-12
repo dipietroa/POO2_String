@@ -14,9 +14,9 @@ int abs(int i){
 void String::constructString(const char * str){
     _size = strlen(str);
     _capacity = _size + 1;
-    this->_str = new char[_capacity];
-    strcpy(this->_str, str);
-    this->_str[_size] = END_OF_STR;
+    _str = new char[_capacity];
+    strcpy(_str, str);
+    _str[_size] = END_OF_STR;
 }
 String::String() : String(""){}
 
@@ -44,16 +44,67 @@ String::String(const double& reel){
 }
 
 String::~String(){
-    if (this->_str != NULL){
-        delete[] this->_str;
-        this->_str = NULL;
+    if (_str != NULL){
+        delete[] _str;
     }
 }
 
 String::operator const char*() const{
-    return _str;
+    return (const char *)_str;
+}
+
+bool String::operator == (const String &str) const{
+    //Comparaison des deux chaînes, la capacité n'a pas
+    //à être comparée selon nous.
+    //return str._str == _str;
+    if(_size != str._size)
+        return false;
+    for(int i = 0; i < _size; i++)
+        if(_str[i] != str._str[i])
+            return false;
+    return true;
 }
 
 unsigned int String::size() const{
     return _size;
+}
+
+String& String::operator +=(const String& b){
+    _size += b._size;
+    _capacity += b._capacity -1;
+    
+    char* buffer = new char[_capacity];
+    strcpy(buffer, _str);
+    strcat(buffer, b._str);
+    
+    delete[] _str;
+    _str = NULL;
+    constructString(buffer);
+    
+    return *this;
+}
+
+String& String::operator +=(const char* b){
+    const String str(b);
+    *this += str;
+}
+
+String& String::operator +=(const char& b){
+    const String str(b);
+    *this += str;
+}
+
+String operator+(String a, const String &b) {
+    a += b;
+    return a;
+}
+
+String operator+(String a, const char* b) {
+    a += b;
+    return a;
+}
+
+String operator+(String a, const char &b) {
+    a += b;
+    return a;
 }

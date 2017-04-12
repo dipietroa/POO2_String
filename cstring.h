@@ -24,6 +24,13 @@ class String{
         void constructString(const char * str);
         ~String();
         operator const char*() const;
+        bool operator == (const String &str) const;
+        friend String operator+(String a, const String &b);
+        friend String operator+(String a, const char *b);
+        friend String operator+(String a, const char &b);
+        String& operator+=(const String &b);
+        String& operator+=(const char *b);
+        String& operator+=(const char &b);
         unsigned int size() const;
 };
 
