@@ -75,8 +75,10 @@ String& String::operator +=(const String& b){
     char* buffer = new char[_capacity + b._size];
     strcpy(buffer, _str);
     strcat(buffer, b._str);
+    buffer[_size + b._size] = END_OF_STR;
     
     delete[] _str;
+    _str = NULL;
     constructString(buffer);
     
     return *this;

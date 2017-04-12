@@ -16,9 +16,11 @@ int main(int argc, char** argv) {
     String str("bonjour");
     str[2] = 'b';
     String str2(-1000000000);
-    str2 = "coco";
+    //str2 = str.substr(1,4);
     
-    cout <<"\'"<< (str += str2).substr(1,7) <<"\'"<< endl <<"\'"<< str2.size() <<"\'"<< endl;
+    cout <<"\'"<< (str += str2) <<"\'"<< endl <<"\'";
+    cout << str;
+            
     return 0;
 }
 
