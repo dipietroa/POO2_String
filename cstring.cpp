@@ -5,6 +5,8 @@
 #include <cfloat>
 #include <cmath>
 #include <stdlib.h>
+#include <stdexcept>
+
 #define END_OF_STR '\0'
 
 int abs(int i){
@@ -107,4 +109,25 @@ String operator+(String a, const char* b) {
 String operator+(String a, const char &b) {
     a += b;
     return a;
+}
+
+char& String::operator[](int index) const{
+    //if(index >= this->size())
+        //throw std::out_of_range();
+
+    return _str[index];
+}
+
+const char* String::operator=(const char* str) {
+    delete[] _str;
+    constructString(str);
+    return _str;
+}
+
+String String::substr(int from, int to) const {
+    char* clone = new char[size()];
+    strcpy(clone, _str);
+    clone += from;
+    clone[to] = END_OF_STR;
+    return String(clone);
 }

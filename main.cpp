@@ -14,10 +14,12 @@ using namespace std;
  */
 int main(int argc, char** argv) {
     String str("bonjour");
-    String str2("bonjour");
-    int salut = 2;
+    str[2] = 'b';
+    String str2(-1000000000);
+    str2 = str;
+    str2 = str.substr(1, 4);
     
-    cout <<"\'"<< (str += str2) <<"\'"<< endl <<"\'"<< str.size() <<"\'"<< endl;
+    cout <<"\'"<< str2 <<"\'"<< endl <<"\'"<< str.size() <<"\'"<< endl;
     return 0;
 }
 
