@@ -25,6 +25,9 @@ class String{
         ~String();
         operator const char*() const;
         unsigned int size() const;
+        char& operator[](int index) const;
+        const char* operator=(const char* str);
+        String substr(int from, int to) const;
 };
 
 #endif	/* CSTRING_H */

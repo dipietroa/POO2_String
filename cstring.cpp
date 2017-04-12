@@ -5,6 +5,7 @@
 #include <cfloat>
 #include <cmath>
 #include <stdlib.h>
+#include <stdexcept>
 #define END_OF_STR '\0'
 
 int abs(int i){
@@ -44,9 +45,8 @@ String::String(const double& reel){
 }
 
 String::~String(){
-    if (this->_str != NULL){
-        delete[] this->_str;
-        this->_str = NULL;
+    if (_str != NULL){
+        delete[] _str;
     }
 }
 
@@ -56,4 +56,25 @@ String::operator const char*() const{
 
 unsigned int String::size() const{
     return _size;
+}
+
+char& String::operator[](int index) const{
+    if(index >= this->size())
+        throw std::out_of_range(String(index));
+
+    return _str[index];
+}
+
+const char* String::operator=(const char* str) {
+    delete[] _str;
+    constructString(str);
+    return _str;
+}
+
+String String::substr(int from, int to) const {
+    char* clone = new char[size()];
+    strcpy(clone, _str);
+    clone += from;
+    clone[to] = END_OF_STR;
+    return String(clone);
 }
