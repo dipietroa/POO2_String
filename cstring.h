@@ -216,9 +216,6 @@ class String{
          * @param to index de fin (précédent dernier caractère)
          * @return
          */
-        char& operator[](int index) const;
-        char& at(int index) const;
-
         String substr(unsigned int from, unsigned int to) const;
 };
 
