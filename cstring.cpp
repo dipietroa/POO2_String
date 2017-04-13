@@ -172,7 +172,7 @@ String& String::operator=(const String& str) {
 String String::substr(int from, int to) const {
     char clone[_capacity];
     strcpy(clone, _str);
-    clone[to] = END_OF_STR;
+    clone[to+1] = END_OF_STR;
     char * str = clone;
     str += from;
     return String(str);

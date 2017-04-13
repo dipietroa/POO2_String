@@ -47,8 +47,9 @@ int main(int argc, char** argv) {
     cout << "Now s2 = " << s2 << endl;
 
     cout << endl;
-    cout << "I make s2 == \"dou\" = " << boolalpha << (s2 == "dou") << endl;
+    cout << "I make s2 == \"dout\" = " << boolalpha << (s2 == "dout") << endl;
     cout << "I make s2 == s1 = " << boolalpha << (s2 == s1) << endl;
+
             
     return 0;
 }
