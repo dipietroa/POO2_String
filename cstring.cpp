@@ -167,11 +167,17 @@ String& String::operator=(const String& str) {
     return *this = str._str;
 }
 
-String String::substr(int from, int to) const {
+String String::substr(unsigned int from, unsigned int to) const {
+    if(from > to)
+        throw invalid_argument("from bigger than to!");
+    if(to >= _size)
+        throw out_of_range("out of range!");
+
     char clone[_capacity];
     strcpy(clone, _str);
     clone[to+1] = END_OF_STR;
     char * str = clone;
     str += from;
+
     return String(str);
 }

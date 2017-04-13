@@ -219,7 +219,7 @@ class String{
         char& operator[](int index) const;
         char& at(int index) const;
 
-        String substr(int from, int to) const;
+        String substr(unsigned int from, unsigned int to) const;
 };
 
 #endif	/* CSTRING_H */
