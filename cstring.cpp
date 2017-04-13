@@ -157,14 +157,19 @@ char& String::operator[](unsigned int index) const{
     return this->at(index);
 }
 
-String& String::operator=(const char* const str) {
+void String::set(const char* str){
     delete[] _str;
     constructString(str);
+}
+
+String& String::operator=(const char* const str) {
+    this->set(str);
     return *this;
 }
 
 String& String::operator=(const String& str) {
-    return *this = str._str;
+    this->set(str._str);
+    return *this;
 }
 
 String String::substr(unsigned int from, unsigned int to) const {

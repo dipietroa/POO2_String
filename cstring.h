@@ -202,6 +202,12 @@ class String{
         char& at(unsigned int index) const;
 
         /**
+        * définit une nouvelle chaîne
+        * @param str
+        */
+        void set(const char* str);
+
+        /**
          * Surcharge opérateur d'affectation
          * @param str
          * @return
