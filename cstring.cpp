@@ -91,6 +91,7 @@ void String::append(const char* const other){
     
     delete[] _str;
     constructString(buffer);
+    delete[] buffer;
 }
 
 void String::append(const char& b){
@@ -148,10 +149,16 @@ char& String::operator[](int index) const{
     return this->at(index);
 }
 
-const char* String::operator=(const char* const str) {
+String& String::operator=(const char* const str) {
     delete[] _str;
     constructString(str);
-    return _str;
+    return *this;
+}
+
+String& String::operator=(const String& str) {
+    delete[] _str;
+    constructString(str._str);
+    return *this;
 }
 
 String String::substr(int from, int to) const {

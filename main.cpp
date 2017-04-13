@@ -17,8 +17,8 @@ int main(int argc, char** argv) {
     String str2(-1000000000);
     str2 = str.substr(1,4);
     
-    cout <<"\'"<< (str +="coucou") <<"\'"<< endl;
-    cout << "\'" << str << "\'" << endl;
+    cout <<"\'"<< (str += str2) <<"\'"<< endl;
+    cout << "\'" << str2 << "\'" << endl;
             
     return 0;
 }

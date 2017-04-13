@@ -16,7 +16,7 @@ class String{
         void constructString(const char * str);
     public:
         String();
-        String(const char * str);
+        String(const char * const str);
         String(const String& str);
         String(const char& chr);
         String(const int& entier);
@@ -41,7 +41,8 @@ class String{
         unsigned int size() const;
         char& operator[](int index) const;
         char& at(int index) const;
-        const char* operator=(const char* str);
+        String& operator=(const char* const str);
+        String& operator=(const String& str);
         String substr(int from, int to) const;
 };
 
