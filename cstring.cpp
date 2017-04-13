@@ -164,9 +164,7 @@ String& String::operator=(const char* const str) {
 }
 
 String& String::operator=(const String& str) {
-    delete[] _str;
-    constructString(str._str);
-    return *this;
+    return *this = str._str;
 }
 
 String String::substr(int from, int to) const {
